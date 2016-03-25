@@ -15,7 +15,7 @@ namespace Original_Gragas
     {
         public static Orbwalking.Orbwalker orbwalker;
         public static Menu menu;
-        public static Menu R_Insec, R_Barrel, R_Auto, Q_LANECLEAR, Q_Auto, E_Menu, barrel, Ult, W_Menu;
+        public static Menu R_Insec, R_Barrel,  Q_LANECLEAR, Q_Auto, E_Menu, barrel, Ult, W_Menu;
 
         static void Main(string[] args)
         {
@@ -103,6 +103,7 @@ namespace Original_Gragas
             GragasSkills.WindyUlt();
             GragasSkills.ThrowQ();
             GragasSkills.DetonateQ();
+            GragasSkills.UseW();
         }
 
         private static void OnCreateObj(GameObject sender, EventArgs args)

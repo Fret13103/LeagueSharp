@@ -106,12 +106,21 @@ namespace Original_Gragas
             }
             if (Program.orbwalker.ActiveMode.ToString().ToLower() == "laneclear")
             {
+                if (Program.W_Menu.Item("laneclearW").GetValue<bool>())
+                {
+                    List<Obj_AI_Base> lMinions = MinionManager.GetMinions(HeroManager.Player.Position, 300);
+                    if (lMinions.Count > Program.W_Menu.Item("num_w").GetValue<Slider>().Value)
+                    {
+                        W.drinkstuff.Cast();
+                    }
+                }
                 if (Program.W_Menu.Item("jungleW").GetValue<bool>())
                 {
                     List<Obj_AI_Base> jMinions = MinionManager.GetMinions(HeroManager.Player.Position, 300, MinionTypes.All, MinionTeam.Neutral);
                     var bigminion = (jMinions.Count >= 1) ? jMinions[jMinions.Count - 1] : null;
                     if (bigminion == null)
                     {
+                        Game.Say("no big minion");
                         return;
                     }
                     if (bigminion.IsValid && W.drinkstuff.IsReady())
@@ -123,15 +132,6 @@ namespace Original_Gragas
                         W.drinkstuff.Cast();
                     }
                 }
-                if (Program.W_Menu.Item("laneclearW").GetValue<bool>())
-                {
-                    List<Obj_AI_Base> lMinions = MinionManager.GetMinions(HeroManager.Player.Position, 300);
-                    if (lMinions.Count < Program.W_Menu.Item("num_w").GetValue<Slider>().Value)
-                    {
-                        return;
-                    }
-                    W.drinkstuff.Cast();
-                }
             }
             else if (Program.orbwalker.ActiveMode.ToString().ToLower() == "combo")
             {
@@ -139,7 +139,7 @@ namespace Original_Gragas
                 {
                     foreach (Obj_AI_Hero hero in HeroManager.Enemies)
                     {
-                        if (hero.Distance(HeroManager.Player) <= 200)
+                        if (hero.Distance(HeroManager.Player) <= 300)
                         {
                             W.drinkstuff.Cast();
                         }
