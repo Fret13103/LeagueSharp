@@ -120,7 +120,6 @@ namespace Original_Gragas
                     var bigminion = (jMinions.Count >= 1) ? jMinions[jMinions.Count - 1] : null;
                     if (bigminion == null)
                     {
-                        Game.Say("no big minion");
                         return;
                     }
                     if (bigminion.IsValid && W.drinkstuff.IsReady())
