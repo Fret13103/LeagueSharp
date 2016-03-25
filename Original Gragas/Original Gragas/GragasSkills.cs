@@ -98,6 +98,56 @@ namespace Original_Gragas
             }
         }
 
+        public static void UseW()
+        {
+            if (!Program.W_Menu.Item("useW").GetValue<bool>())
+            {
+                return;
+            }
+            if (Program.orbwalker.ActiveMode.ToString().ToLower() == "laneclear")
+            {
+                if (Program.W_Menu.Item("jungleW").GetValue<bool>())
+                {
+                    List<Obj_AI_Base> jMinions = MinionManager.GetMinions(HeroManager.Player.Position, 300, MinionTypes.All, MinionTeam.Neutral);
+                    var bigminion = (jMinions.Count >= 1) ? jMinions[jMinions.Count - 1] : null;
+                    if (bigminion == null)
+                    {
+                        return;
+                    }
+                    if (bigminion.IsValid && W.drinkstuff.IsReady())
+                    {
+                        W.drinkstuff.Cast();
+                    }
+                    else if (jMinions.Count > 1)
+                    {
+                        W.drinkstuff.Cast();
+                    }
+                }
+                if (Program.W_Menu.Item("laneclearW").GetValue<bool>())
+                {
+                    List<Obj_AI_Base> lMinions = MinionManager.GetMinions(HeroManager.Player.Position, 300);
+                    if (lMinions.Count < Program.W_Menu.Item("num_w").GetValue<Slider>().Value)
+                    {
+                        return;
+                    }
+                    W.drinkstuff.Cast();
+                }
+            }
+            else if (Program.orbwalker.ActiveMode.ToString().ToLower() == "combo")
+            {
+                if (Program.W_Menu.Item("comboW").GetValue<bool>())
+                {
+                    foreach (Obj_AI_Hero hero in HeroManager.Enemies)
+                    {
+                        if (hero.Distance(HeroManager.Player) <= 200)
+                        {
+                            W.drinkstuff.Cast();
+                        }
+                    }
+                }
+            }
+        }
+
         public static void DetonateQ()
         {
 

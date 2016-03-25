@@ -15,7 +15,7 @@ namespace Original_Gragas
     {
         public static Orbwalking.Orbwalker orbwalker;
         public static Menu menu;
-        public static Menu R_Insec, R_Barrel, R_Auto, Q_LANECLEAR, Q_Auto, E_Menu, barrel, Ult;
+        public static Menu R_Insec, R_Barrel, R_Auto, Q_LANECLEAR, Q_Auto, E_Menu, barrel, Ult, W_Menu;
 
         static void Main(string[] args)
         {
@@ -40,6 +40,14 @@ namespace Original_Gragas
                 list.Add(unit.ChampionName);
                 i = i + 1;
             }
+
+            W_Menu = menu.AddSubMenu(new Menu("Gragas W", "W"));
+
+            W_Menu.AddItem(new MenuItem("useW", "Let script use gragas W").SetValue(true));
+            W_Menu.AddItem(new MenuItem("jungleW", "Clear jungle with W").SetValue(true));
+            W_Menu.AddItem(new MenuItem("laneclearW", "Laneclear with w").SetValue(true));
+            W_Menu.AddItem(new MenuItem("num_w", "Number of minions to W").SetValue(new Slider(2, 1, 4)));
+            W_Menu.AddItem(new MenuItem("comboW", "Use W in combo").SetValue(true));
 
             E_Menu = menu.AddSubMenu(new Menu("Gragas E", "E"));
 
