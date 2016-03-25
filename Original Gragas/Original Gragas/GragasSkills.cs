@@ -326,7 +326,7 @@ namespace Original_Gragas
                             }
                         }
 
-                        Vector3 endpos = ultpred.CastPosition;
+                        Vector3 endpos = target.Position;
                         Vector3 ultonpos = endpos + (endpos - HeroManager.Player.Position).Normalized() * (R.ExplosionRadius);
                         Vector3 ultendpos = target.Position + (target.Position - ultonpos).Normalized() * (R.KnockbackRange);
 
